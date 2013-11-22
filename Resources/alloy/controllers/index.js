@@ -28,7 +28,7 @@ function Controller() {
         width: Ti.UI.FILL,
         left: 0,
         right: 0,
-        backgroundColor: Alloy.Globals.backgroundColor,
+        backgroundColor: "#fff",
         separatorStyle: 0,
         id: "tblMovies"
     });

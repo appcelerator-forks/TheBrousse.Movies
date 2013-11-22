@@ -1,4 +1,18 @@
 function Controller() {
+    function fetchFavourites() {
+        var rows = sqlLite.getFavourites();
+        var alternativeRow = false;
+        for (var i = 0; response.movies.length > i; i++) {
+            var row = Alloy.createController("MovieRow");
+            row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
+            row.setTitle(response.movies[i].title);
+            row.setSynopsis(response.movies[i].synopsis);
+            row.setFavourite(true);
+            rows.push(row.getView());
+            alternativeRow = alternativeRow ? false : true;
+        }
+        $.tblFavourites.setData(rows);
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -48,19 +62,14 @@ function Controller() {
         title: "My Favourites",
         id: "__alloyId2"
     });
-    $.__views.__alloyId3 = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#000",
-        font: {
-            fontSize: 20,
-            fontFamily: "Helvetica Neue"
-        },
-        textAlign: "center",
-        text: "I am Window 2",
-        id: "__alloyId3"
+    $.__views.favouritesWrapper = Ti.UI.createView({
+        id: "favouritesWrapper"
     });
-    $.__views.__alloyId2.add($.__views.__alloyId3);
+    $.__views.__alloyId2.add($.__views.favouritesWrapper);
+    $.__views.tblFavourites = Ti.UI.createTableView({
+        id: "tblFavourites"
+    });
+    $.__views.favouritesWrapper.add($.__views.tblFavourites);
     $.__views.__alloyId1 = Ti.UI.createTab({
         window: $.__views.__alloyId2,
         title: "Favourites",
@@ -73,6 +82,8 @@ function Controller() {
     _.extend($, $.__views);
     var DataModule = require("Data");
     var dataModule = new DataModule.Data();
+    var SQLiteModule = require("SQLite");
+    var sqlLite = new SQLiteModule.SQLite();
     dataModule.fetchMovies("batman", function(success, response) {
         if (success) {
             debugger;
@@ -98,8 +109,12 @@ function Controller() {
         width: Ti.UI.SIZE,
         text: "Latest Movies",
         font: {
-            fontWeight: "bold"
+            fontWeight: "bold",
+            fontSize: 16
         }
+    });
+    Ti.App.addEventListener("refreshFavourites", function() {
+        fetchFavourites();
     });
     $.tabs.open();
     _.extend($, exports);

@@ -1,6 +1,9 @@
 var DataModule = require('Data');
 var dataModule = new DataModule.Data();
 
+var SQLiteModule = require("SQLite");
+var sqlLite = new SQLiteModule.SQLite();
+
 /*
  * fetch the movies matching "Les Bronzes"
  */
@@ -41,8 +44,37 @@ $.window1.titleControl= Ti.UI.createLabel({
 	width: Ti.UI.SIZE,
 	text: 'Latest Movies',
 	font: {
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		fontSize: 16
 	}
 });
+
+
+
+function fetchFavourites(){
+	var rows = sqlLite.getFavourites();
+	var alternativeRow = false;
+		
+	for(var i = 0; i < response.movies.length; i++){
+		var row = Alloy.createController('MovieRow');
+			
+		row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
+		row.setTitle(response.movies[i].title);
+		row.setSynopsis(response.movies[i].synopsis);
+		row.setFavourite(true);
+		rows.push(row.getView()); //id, title, runtime, ratings, posters, year, synopsis
+		
+		alternativeRow = (alternativeRow) ? false : true;
+	}
+		
+	//set the array of rows to the table view
+	$.tblFavourites.setData(rows);
+}
+
+Ti.App.addEventListener('refreshFavourites', function(e){
+	fetchFavourites();
+});
+
+
 
 $.tabs.open();

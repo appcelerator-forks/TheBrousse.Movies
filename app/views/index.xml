@@ -1,0 +1,22 @@
+<Alloy>
+	<TabGroup id="tabs">
+		
+		<Tab title="Movies" icon="images/reviews.png">
+			<Window class="window" id="window1">
+				
+				 <View id="tableWrapper">
+                       <TableView id="tblMovies" />
+                </View>
+                
+			</Window>
+		</Tab>
+		
+		
+		<Tab title="Favourites" icon="images/heart2.png">
+			<Window title="My Favourites" class="window">
+				<Label>I am Window 2</Label>
+			</Window>
+		</Tab>
+		
+	</TabGroup>
+</Alloy>

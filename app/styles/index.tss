@@ -1,0 +1,32 @@
+".window" :{
+	backgroundColor: '#fff',
+	barColor: Alloy.Globals.blockColor,
+	tintColor: Alloy.Globals.highlightColor,
+	statusBarStyle: Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+}
+
+"#tabs":{
+	tabsBackgroundColor: Alloy.Globals.blockColor,
+	tabHeight: 60,
+	tabsTintColor: Alloy.Globals.highlightColor
+}
+
+"Label": {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: "#000",
+	font: {
+		fontSize: 20,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center'
+} 
+
+"#tblMovies":{
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL,
+	left: 0,
+	right: 0,
+	backgroundColor: Alloy.Globals.backgroundColor,
+	separatorStyle: 0
+}

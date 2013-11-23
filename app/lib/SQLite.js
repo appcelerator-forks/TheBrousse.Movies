@@ -27,7 +27,7 @@ SQLite.prototype.deleteFavourite = function(id){
 
 SQLite.prototype.addFavourite = function(id, jsonData){
 	var jsonString = JSON.stringify(jsonData);
-	this.db.execute("INSERT INTO favs (id, jsonData) VALUES (?, ?)", id, jsonString);
+	this.db.execute("INSERT OR REPLACE INTO favs (id, jsonData) VALUES (?, ?)", id, jsonString);
 	alert('Favourite added');
 	Ti.App.fireEvent('refreshFavourites');
 };

@@ -6,3 +6,12 @@ $.synopsis.text = args.critics_consensus;
 $.thumbnail.image = args.posters.profile;
 $.rating.text = args.ratings.critics_score;
 
+var rows = [];
+
+for (var i = 0; i < args.abridged_cast.length; i++) {
+	var row = Ti.UI.createTableViewRow({ title: args.abridged_cast[i].name });
+
+	rows.push(row);
+}
+
+$.tblCast.setData(rows);

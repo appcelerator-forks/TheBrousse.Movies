@@ -86,6 +86,4 @@ Ti.App.addEventListener('refreshFavourites', function(e){
 	fetchFavourites();
 });
 
-
-
 $.tabs.open();

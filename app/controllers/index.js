@@ -9,27 +9,30 @@ var sqlLite = new SQLiteModule.SQLite();
  */
 dataModule.fetchMovies('batman', function(success, response){
 	if(success){
-		
+
 		debugger;
 		Ti.API.info(response);
-		
+
 		var rows = [];
 		var alternativeRow = false;
-		
+
 		for(var i = 0; i < response.movies.length; i++){
-			var row = Alloy.createController('MovieRow');
-			
+			var row = Alloy.createController('MovieRow', {
+				movie: response.movies[i]
+			});
+
 			row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
 			row.setTitle(response.movies[i].title);
 			row.setSynopsis(response.movies[i].synopsis);
+
 			rows.push(row.getView()); //id, title, runtime, ratings, posters, year, synopsis
-			
+
 			alternativeRow = (alternativeRow) ? false : true;
 		}
-		
+
 		//set the array of rows to the table view
 		$.tblMovies.setData(rows);
-	
+
 	}
 	else {
 		Ti.UI.createAlertDialog({
@@ -39,8 +42,8 @@ dataModule.fetchMovies('batman', function(success, response){
 	}
 });
 
-$.window1.titleControl= Ti.UI.createLabel({ 
- 	color: '#fff', 
+$.window1.titleControl= Ti.UI.createLabel({
+ 	color: '#fff',
 	width: Ti.UI.SIZE,
 	text: 'Latest Movies',
 	font: {
@@ -49,24 +52,32 @@ $.window1.titleControl= Ti.UI.createLabel({
 	}
 });
 
+$.tblMovies.addEventListener('click', function(e) {
+	alert(e.row.movie.title);
 
+
+	var detailController = Alloy.createController('Detail');
+	var detailWindow = detailController.getView();
+
+	detailWindow.open();
+});
 
 function fetchFavourites(){
 	var rows = sqlLite.getFavourites();
 	var alternativeRow = false;
-		
+
 	for(var i = 0; i < response.movies.length; i++){
 		var row = Alloy.createController('MovieRow');
-			
+
 		row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
 		row.setTitle(response.movies[i].title);
 		row.setSynopsis(response.movies[i].synopsis);
 		row.setFavourite(true);
 		rows.push(row.getView()); //id, title, runtime, ratings, posters, year, synopsis
-		
+
 		alternativeRow = (alternativeRow) ? false : true;
 	}
-		
+
 	//set the array of rows to the table view
 	$.tblFavourites.setData(rows);
 }

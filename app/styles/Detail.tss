@@ -52,3 +52,15 @@
 	top: 210,
 	bottom: 0
 }
+
+"#favButton":{
+	backgroundImage: '/images/heart2.png',
+	backgroundColor: Alloy.Globals.highlightColor,
+	borderRadius: 3,
+	width: 29,
+	height: 29,
+	right: 10,
+	top: 160,
+	zIndex: 99
+}
+

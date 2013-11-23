@@ -57,20 +57,21 @@ $.window1.titleControl= Ti.UI.createLabel({
 $.tblMovies.addEventListener('click', function(e) {
 	var detailController = Alloy.createController('Detail', e.row._data);
 	var detailWindow = detailController.getView();
-
-	detailWindow.open();
+	$.tabs.getActiveTab().open(detailWindow);
 });
 
 function fetchFavourites(){
-	var rows = sqlLite.getFavourites();
+	debugger;
+	var movies = sqlLite.getFavourites();
 	var alternativeRow = false;
+	var rows = [];
 
-	for(var i = 0; i < response.movies.length; i++){
+	for(var i = 0; i <  movies.length; i++){
 		var row = Alloy.createController('MovieRow');
 
 		row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
-		row.setTitle(response.movies[i].title);
-		row.setSynopsis(response.movies[i].synopsis);
+		row.setTitle(movies[i].title);
+		row.setSynopsis(movies[i].synopsis);
 		row.setFavourite(true);
 		rows.push(row.getView()); //id, title, runtime, ratings, posters, year, synopsis
 

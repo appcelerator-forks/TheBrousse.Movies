@@ -5,22 +5,31 @@ function SQLite(){
 
 SQLite.prototype.executeCommand = function(query){
 	this.db.open();
-	var results = this.db.execute(query);
-	this.db.close();
-	return results;
+	this.db.execute(query);
 };
 
-SQLite.getFavourites = function(){
-	return this.executeCommand("SELECT * FROM favs");
+SQLite.prototype.getFavourites = function(){
+	var records = this.db.execute("SELECT * FROM favs");
+	var movies = [];
+	while (records.isValidRow()){
+		movies.push(JSON.parse(records.fieldByName('jsonData')));
+		records.next();
+	}
+	
+	records.close();
+	
+	return movies;
 };
 
-SQLite.deleteFavourite = function(id){
+SQLite.prototype.deleteFavourite = function(id){
 	this.executeCommand("DELETE FROM favs WHERE id = '" + id + "'");
 };
 
-SQLite.addFavourite = function(id, jsonData){
+SQLite.prototype.addFavourite = function(id, jsonData){
 	var jsonString = JSON.stringify(jsonData);
-	this.executeCommand("INSERT INTO favs (id, jsonData) VALUES ('" + id + "', '" + jsonData + "'");
+	this.db.execute("INSERT INTO favs (id, jsonData) VALUES (?, ?)", id, jsonString);
+	alert('Favourite added');
+	Ti.App.fireEvent('refreshFavourites');
 };
 
 exports.SQLite = SQLite;

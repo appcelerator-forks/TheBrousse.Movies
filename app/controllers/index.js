@@ -23,7 +23,8 @@ dataModule.fetchMovies('batman', function(success, response){
 
 			row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
 			row.setTitle(response.movies[i].title);
-			row.setSynopsis(response.movies[i].synopsis);
+			row.setSynopsis(response.movies[i].critics_consensus);
+			row.setThumbnail(response.movies[i].posters.thumbnail);
 			row.setMovie(response.movies[i]);
 
 			rows.push(row.getView()); //id, title, runtime, ratings, posters, year, synopsis

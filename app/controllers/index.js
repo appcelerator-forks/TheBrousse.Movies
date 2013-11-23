@@ -24,6 +24,7 @@ dataModule.fetchMovies('batman', function(success, response){
 			row.Wrapper.setBackgroundColor(alternativeRow ? Alloy.Globals.lightColor2 : Alloy.Globals.lightColor);
 			row.setTitle(response.movies[i].title);
 			row.setSynopsis(response.movies[i].synopsis);
+			row.setMovie(response.movies[i]);
 
 			rows.push(row.getView()); //id, title, runtime, ratings, posters, year, synopsis
 
@@ -53,10 +54,7 @@ $.window1.titleControl= Ti.UI.createLabel({
 });
 
 $.tblMovies.addEventListener('click', function(e) {
-	alert(e.row.movie.title);
-
-
-	var detailController = Alloy.createController('Detail');
+	var detailController = Alloy.createController('Detail', e.row._data);
 	var detailWindow = detailController.getView();
 
 	detailWindow.open();

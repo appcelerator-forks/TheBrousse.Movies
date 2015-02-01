@@ -14,15 +14,15 @@
 
 ".heading":{
 	width: Ti.UI.SIZE,
-	height: 30,
+	height: 25,
 	left: 90,
 	top: 0,
 	right: 10,
 	font :{
-		fontSize: 16,
+		fontSize: 18,
 		fontWeight: 'bold'
 	},
-	color: Alloy.Globals.highlightColor
+	color: '#000'
 }
 
 ".subHeading":{
@@ -30,11 +30,11 @@
 	height: 50,
 	left: 90,
 	right: 10,
-	top: 30,
+	top: 25,
 	font :{
-		fontSize: 12
+		fontSize: 13
 	},
-	color: Alloy.Globals.highlightColor2
+	color: '#212121'
 }
 
 

@@ -1,14 +1,14 @@
 ".window" :{
 	backgroundColor: '#fff',
-	barColor: Alloy.Globals.blockColor,
+	barColor: '#1976d2',
 	tintColor: Alloy.Globals.highlightColor,
 	statusBarStyle: Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 }
 
 "#tabs":{
-	tabsBackgroundColor: Alloy.Globals.blockColor,
+	tabsBackgroundColor: '#1976d2',
 	tabHeight: 60,
-	tabsTintColor: Alloy.Globals.highlightColor
+	tabsTintColor: '#fff'
 }
 
 "Label": {

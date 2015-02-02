@@ -5,7 +5,8 @@
 
 "#thumbnail": {
 	left: 5,
-	top: 5
+	top: 5,
+	width: 110
 }
 
 "#title": {
@@ -45,7 +46,8 @@
 	},
 	width: '95%',
 	height: Ti.UI.SIZE,
-	top: 190
+	top: 190,
+	backgroundColor: 'lightgray'
 }
 
 "#tblCast": {
@@ -55,12 +57,12 @@
 
 "#favButton":{
 	backgroundImage: '/images/heart2.png',
-	backgroundColor: Alloy.Globals.highlightColor,
+	backgroundColor: '#1976d2',
 	borderRadius: 3,
 	width: 29,
 	height: 29,
 	right: 10,
-	top: 160,
+	top: 65,
 	zIndex: 99
 }
 
